@@ -1,0 +1,6 @@
+{
+ "tau": 0.945,
+ "tau_rule": "nilai terkecil pada grid 0.005 sehingga akurasi prediksi-diterima pada validation >= 0.99",
+ "model": "CNN_reg_final.keras",
+ "input_size": 64
+}

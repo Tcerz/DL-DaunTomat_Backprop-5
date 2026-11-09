@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Pengujian model CNN untuk klasifikasi penyakit daun tomat berdasarkan notebook dan laporan penelitian.">
+<title>Pengujian CNN | Daun Tomat</title>
+<link rel="stylesheet" href="./style.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script defer src="./app.js"></script>
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="identity"><span class="identity-mark" aria-hidden="true"></span><div><strong>Tomato Leaf Classification</strong><small>Model testing · CNN + regularisasi</small></div></div>
+  <div class="header-actions"><span id="enginePill" class="engine"><i class="dot"></i> Memuat model</span><button type="button" id="themeToggle" class="theme-button" aria-label="Ganti tema">Mode gelap</button></div>
+</header>
+<main>
+<section class="page-heading"><div class="eyebrow">PENGUJIAN MODEL</div><h1>Klasifikasi Penyakit Daun Tomat</h1><p>Antarmuka pengujian model CNN yang telah dilatih pada penelitian. Proses inferensi menggunakan bobot asli dan berjalan langsung di browser.</p></section>
+<div class="model-meta"><span><b>Model</b> CNN + Regularisasi</span><span><b>Input</b> RGB 64 × 64</span><span><b>Kelas</b> 10</span><span><b>Threshold</b> 0,945</span></div>
+<section class="workspace">
+  <article class="panel"><div class="panel-heading"><div><span class="section-number">01</span><h2>Input Gambar</h2></div></div>
+    <div class="tabbar" role="tablist" aria-label="Sumber gambar"><button type="button" class="tab active" data-tab="upload">Upload</button><button type="button" class="tab" data-tab="camera">Kamera</button><button type="button" class="tab" data-tab="examples">Data contoh</button></div>
+    <div id="uploadTab" class="tab-content"><label class="dropzone" id="dropzone" tabindex="0"><input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/bmp" hidden><span class="upload-symbol">+</span><strong>Pilih gambar atau tarik file ke sini</strong><small>PNG, JPG, WEBP, BMP · Maksimal 10 MB</small></label></div>
+    <div id="cameraTab" class="tab-content hidden"><div class="camera-frame"><video id="cameraVideo" autoplay playsinline muted></video><div class="camera-help">Arahkan kamera ke daun atau foto daun pada layar lain.</div></div><div class="camera-controls"><button type="button" class="btn secondary" id="cameraStart">Aktifkan kamera</button><button type="button" class="btn secondary" id="cameraFlip">Ganti kamera</button><button type="button" class="btn secondary" id="cameraSnap" disabled>Ambil frame</button></div><label class="toggle-row"><input type="checkbox" id="liveToggle" checked> Prediksi otomatis setiap 1,2 detik</label><p class="fine">Kamera memerlukan HTTPS atau localhost. Hasil dari layar HP dapat terpengaruh pantulan, fokus, dan pola layar.</p></div>
+    <div id="examplesTab" class="tab-content hidden"><p class="mini-intro">Pilih gambar contoh yang disertakan dalam proyek asli.</p><div id="exampleGrid" class="example-grid"></div></div>
+    <div class="preview-wrap"><div class="field-label">Pratinjau input</div><div id="imageStage" class="image-stage"><img id="previewImage" alt="Gambar yang dianalisis" hidden><div id="emptyPreview" class="empty"><strong>Belum ada gambar</strong><small>Pilih sumber gambar di atas untuk memulai.</small></div><canvas id="frameCanvas" width="64" height="64" hidden></canvas></div><div class="image-meta"><span id="sourceLabel">Tidak ada file</span><span id="imageDimensions">—</span></div></div>
+    <div class="settings"><div class="setting-head"><div><h3>Confidence threshold</h3><p>Nilai default dari penelitian: 0,945</p></div><strong id="tauValue">0,945</strong></div><input aria-label="Confidence threshold" id="tauSlider" type="range" min="0" max="1" step="0.005" value="0.945"><button type="button" id="tauReset" class="text-button">Reset ke nilai penelitian</button></div>
+    <button type="button" class="btn primary analyze" id="analyzeBtn" disabled>Jalankan Prediksi</button>
+  </article>
+  <article class="panel"><div class="panel-heading"><div><span class="section-number">02</span><h2>Hasil Prediksi</h2></div></div><div id="statusBox" class="status-box" role="status">Memuat model CNN…</div>
+    <div id="resultPlaceholder" class="result-placeholder"><strong>Belum ada hasil pengujian</strong><p>Hasil klasifikasi akan ditampilkan setelah gambar dianalisis.</p></div>
+    <div id="resultDetail" hidden><div class="prediction-head"><span class="field-label">Kelas dengan probabilitas tertinggi</span><span id="acceptBadge" class="accept-badge">—</span></div><h3 class="disease" id="predName">—</h3><div class="latin" id="predOriginal">—</div><div class="confidence-row"><div><strong id="confidenceText">—</strong><span>Confidence</span></div><span id="thresholdText">τ = 0,945</span></div><div class="confidence-meter"><div id="confidenceBar"></div><span id="thresholdMarker"></span></div><div class="summary-note" id="predictionNote"></div><h3 class="result-subtitle">Probabilitas kelas</h3><div id="probabilities" class="probabilities"></div><div class="cam-block"><h3>Grad-CAM <span class="muted">· relu4</span></h3><p>Visualisasi area yang berkontribusi pada hasil model.</p><div class="gradcam-flex"><div class="cam-image"><canvas id="camCanvas" width="256" height="256"></canvas></div><p>Warna hangat menunjukkan area yang lebih berpengaruh terhadap prediksi. Visualisasi bersifat interpretatif.</p></div></div></div>
+  </article>
+</section>
+<section class="method-note"><h2>Catatan pengujian</h2><p>Website ini menggunakan bobot dari <code>CNN_reg_final.keras</code>, tanpa pelatihan ulang. Preprocessing gambar mengikuti input RGB 64 × 64 dan normalisasi nilai piksel / 255. Angka akurasi <strong>92,55%</strong> berasal dari data uji penelitian, bukan hasil pengujian webcam atau gambar baru. Penggunaan kamera bertujuan mendemonstrasikan inferensi model.</p><details><summary>Informasi kesesuaian dengan penelitian</summary><p>Model terdiri dari empat blok Conv–BN–ReLU dengan tiga tahap pooling, Global Average Pooling, dan Dense Softmax. Bobot CNN asli diekspor ke tensor Float32 untuk diproses di TensorFlow.js. Proses resize pada browser menggunakan Canvas; hasil dapat berbeda kecil dari PIL pada Python.</p><p>Dokumen referensi: <a href="./reference/config.json">Konfigurasi</a> · <a href="./model/manifest.json">Manifest bobot</a></p></details></section>
+</main><footer>Tomato Leaf Classification <span>·</span> Demonstrasi model CNN berdasarkan laporan penelitian</footer>
+</div>
+<script>
+(function(){const key='tomatoleaf-theme',root=document.documentElement,button=()=>document.getElementById('themeToggle');let current;try{current=localStorage.getItem(key)}catch(e){};function setTheme(theme){root.dataset.theme=theme;document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#0d0f0e':'#ffffff';const b=button();if(b){b.textContent=theme==='dark'?'Mode terang':'Mode gelap';b.setAttribute('aria-label',theme==='dark'?'Aktifkan mode terang':'Aktifkan mode gelap')}}document.addEventListener('DOMContentLoaded',()=>{setTheme(current==='light'||current==='dark'?current:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));button().addEventListener('click',()=>{const next=root.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem(key,next)}catch(e){}})})})();
+</script>
+</body></html>

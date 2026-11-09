@@ -1,0 +1,193 @@
+{
+  "format": "keras-cnn-f32-v1",
+  "name": "CNN_reg_final.keras",
+  "parameters": 99450,
+  "inputSize": 64,
+  "normalization": "RGB / 255.0",
+  "classNames": [
+    "Bacterial_spot",
+    "Early_blight",
+    "Late_blight",
+    "Leaf_Mold",
+    "Septoria_leaf_spot",
+    "Spider_mites",
+    "Target_Spot",
+    "Tomato_Yellow_Leaf_Curl_Virus",
+    "Tomato_mosaic_virus",
+    "healthy"
+  ],
+  "tau": 0.945,
+  "gradcamLayer": "relu4",
+  "weights": {
+    "conv1.kernel": {
+      "shape": [
+        3,
+        3,
+        3,
+        16
+      ],
+      "offset": 0,
+      "length": 432
+    },
+    "bn1.gamma": {
+      "shape": [
+        16
+      ],
+      "offset": 432,
+      "length": 16
+    },
+    "bn1.beta": {
+      "shape": [
+        16
+      ],
+      "offset": 448,
+      "length": 16
+    },
+    "bn1.mean": {
+      "shape": [
+        16
+      ],
+      "offset": 464,
+      "length": 16
+    },
+    "bn1.variance": {
+      "shape": [
+        16
+      ],
+      "offset": 480,
+      "length": 16
+    },
+    "conv2.kernel": {
+      "shape": [
+        3,
+        3,
+        16,
+        32
+      ],
+      "offset": 496,
+      "length": 4608
+    },
+    "bn2.gamma": {
+      "shape": [
+        32
+      ],
+      "offset": 5104,
+      "length": 32
+    },
+    "bn2.beta": {
+      "shape": [
+        32
+      ],
+      "offset": 5136,
+      "length": 32
+    },
+    "bn2.mean": {
+      "shape": [
+        32
+      ],
+      "offset": 5168,
+      "length": 32
+    },
+    "bn2.variance": {
+      "shape": [
+        32
+      ],
+      "offset": 5200,
+      "length": 32
+    },
+    "conv3.kernel": {
+      "shape": [
+        3,
+        3,
+        32,
+        64
+      ],
+      "offset": 5232,
+      "length": 18432
+    },
+    "bn3.gamma": {
+      "shape": [
+        64
+      ],
+      "offset": 23664,
+      "length": 64
+    },
+    "bn3.beta": {
+      "shape": [
+        64
+      ],
+      "offset": 23728,
+      "length": 64
+    },
+    "bn3.mean": {
+      "shape": [
+        64
+      ],
+      "offset": 23792,
+      "length": 64
+    },
+    "bn3.variance": {
+      "shape": [
+        64
+      ],
+      "offset": 23856,
+      "length": 64
+    },
+    "conv4.kernel": {
+      "shape": [
+        3,
+        3,
+        64,
+        128
+      ],
+      "offset": 23920,
+      "length": 73728
+    },
+    "bn4.gamma": {
+      "shape": [
+        128
+      ],
+      "offset": 97648,
+      "length": 128
+    },
+    "bn4.beta": {
+      "shape": [
+        128
+      ],
+      "offset": 97776,
+      "length": 128
+    },
+    "bn4.mean": {
+      "shape": [
+        128
+      ],
+      "offset": 97904,
+      "length": 128
+    },
+    "bn4.variance": {
+      "shape": [
+        128
+      ],
+      "offset": 98032,
+      "length": 128
+    },
+    "logits.kernel": {
+      "shape": [
+        128,
+        10
+      ],
+      "offset": 98160,
+      "length": 1280
+    },
+    "logits.bias": {
+      "shape": [
+        10
+      ],
+      "offset": 99440,
+      "length": 10
+    }
+  },
+  "sha256": "0528714687cbc20c2b11ecf92a07a6c18435c600e698babb2dc63f80a7b1f98c",
+  "sourceSha256": "a335e550ee3f2ba89737adbde715b5204a738c0be68c0a0a701eb5c249fd94a2",
+  "notes": "Exact Keras tensors exported to IEEE Float32. Browser uses tf.conv2d + inference BN + relu + maxPool + GAP + dense softmax; augmentation/dropout inactive."
+}

@@ -1,0 +1,109 @@
+{
+ "tau": 0.945,
+ "rows": [
+  {
+   "file": "00_Bacterial_spot.jpg",
+   "true": "Bacterial_spot",
+   "pred": "Bacterial_spot",
+   "conf": 0.9935449361801147,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "01_Early_blight.jpg",
+   "true": "Early_blight",
+   "pred": "Bacterial_spot",
+   "conf": 0.742326021194458,
+   "accepted": false,
+   "note": "Salah dan ditolak: threshold mencegah diagnosis keliru"
+  },
+  {
+   "file": "02_Late_blight.jpg",
+   "true": "Late_blight",
+   "pred": "Late_blight",
+   "conf": 0.994992196559906,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "03_Leaf_Mold.jpg",
+   "true": "Leaf_Mold",
+   "pred": "Leaf_Mold",
+   "conf": 0.9993448853492737,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "04_Septoria_leaf_spot.jpg",
+   "true": "Septoria_leaf_spot",
+   "pred": "Septoria_leaf_spot",
+   "conf": 0.9691786170005798,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "05_Spider_mites.jpg",
+   "true": "Spider_mites",
+   "pred": "Spider_mites",
+   "conf": 0.8774489164352417,
+   "accepted": false,
+   "note": "Benar tetapi ditolak (keyakinan < tau): contoh kompromi threshold"
+  },
+  {
+   "file": "06_Target_Spot.jpg",
+   "true": "Target_Spot",
+   "pred": "Target_Spot",
+   "conf": 0.37033212184906006,
+   "accepted": false,
+   "note": "Benar tetapi ditolak (keyakinan < tau): contoh kompromi threshold"
+  },
+  {
+   "file": "07_Tomato_Yellow_Leaf_Curl_Virus.jpg",
+   "true": "Tomato_Yellow_Leaf_Curl_Virus",
+   "pred": "Tomato_Yellow_Leaf_Curl_Virus",
+   "conf": 0.9999638795852661,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "08_Tomato_mosaic_virus.jpg",
+   "true": "Tomato_mosaic_virus",
+   "pred": "Tomato_mosaic_virus",
+   "conf": 0.9881625771522522,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "09_healthy.jpg",
+   "true": "healthy",
+   "pred": "healthy",
+   "conf": 0.9998340606689453,
+   "accepted": true,
+   "note": "Benar dan diterima"
+  },
+  {
+   "file": "ood_Pepper.jpg",
+   "true": "non-tomat (Pepper)",
+   "pred": "Septoria_leaf_spot",
+   "conf": 0.9863345623016357,
+   "accepted": true,
+   "note": "Non-tomat lolos (kegagalan deteksi di luar domain)"
+  },
+  {
+   "file": "ood_Potato.jpg",
+   "true": "non-tomat (Potato)",
+   "pred": "Target_Spot",
+   "conf": 0.6913074254989624,
+   "accepted": false,
+   "note": "Non-tomat ditolak"
+  },
+  {
+   "file": "salah_Septoria_leaf_spot_jadi_Tomato_Yellow_Leaf_Curl_Virus.jpg",
+   "true": "Septoria_leaf_spot",
+   "pred": "Tomato_Yellow_Leaf_Curl_Virus",
+   "conf": 0.9911603331565857,
+   "accepted": true,
+   "note": "Salah dengan keyakinan tinggi dan diterima: keterbatasan threshold"
+  }
+ ]
+}
